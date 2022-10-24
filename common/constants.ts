@@ -1,0 +1,1 @@
+export const navItems = ['Home', 'TV Shows', 'Movies', 'New & Popular', 'My List'];
