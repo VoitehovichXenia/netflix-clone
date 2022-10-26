@@ -4,6 +4,7 @@ import { MovieInfo } from '../types'
 import Req from '../common/utils/request'
 import Banner from '../components/Banner'
 import Header from '../components/Header'
+import Slider from '../components/Slider'
 
 type HomeDataKeys = 'originals' | 'topRated' | 'trending' | 'romanceMovies' | 'horrorMovies' | 'comedyMovies' | 'actionMovies' | 'documentaries';
 
@@ -14,16 +15,23 @@ type HomeProps = {
 const Home: NextPage<HomeProps> = ({ originals, topRated, romanceMovies, horrorMovies, comedyMovies, trending, actionMovies, documentaries }) => {
   
   return (
-    <div className="relative h-screen bg-gradient-to-b from-black to-gray-900/10">
+    <div className="relative h-screen bg-gradient-to-b">
       <Head>
         <title>Netflix</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="relative pl-4 pb-24 lg:space-y-24 lg:pl-16">
+      <main className="relative pl-4 pb-24 w-screen box-border lg:space-y-24 lg:pl-16">
         <Banner originals={originals} />
-        <section>
-          {/* Rows */}
+        <section className="flex flex-col gap-y-2 md:gap-y-14">
+          <Slider title="Trending now" movies={trending} />
+          <Slider title="Top rated" movies={topRated} />
+          {/* User List Component*/}
+          <Slider title="Comedies" movies={comedyMovies} />
+          <Slider title="Action movies" movies={actionMovies} />
+          <Slider title="Horrors" movies={horrorMovies} />
+          <Slider title="Romance movies" movies={romanceMovies} />
+          <Slider title="Documentaries" movies={documentaries} />
         </section>
       </main>
       {/* Modal */}
