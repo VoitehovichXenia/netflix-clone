@@ -5,7 +5,15 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'gradient-to-b': 'linear-gradient(to bottom,rgba(20,20,20,0) 0,rgba(20,20,20,.15) 15%,rgba(20,20,20,.35) 29%,rgba(20,20,20,.58) 44%,rgba(20,20,20,0.78) 68%,rgba(17,24,39,0.9) 100%);'
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-textshadow'),
+    require('tailwind-scrollbar-hide'),
+    require('tailwind-scrollbar')({ nocompatible: true }),
+  ],
 }
