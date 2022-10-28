@@ -5,9 +5,13 @@ import { UserIcon, BellIcon} from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { FC, useEffect, useState } from "react";
 import { navItems } from "../../common/constants";
+import useAuth from "../../hooks/useAuth";
 
 const Header:FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { logout } = useAuth();
+
+  const handleLogout = () => logout();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,7 +44,7 @@ const Header:FC = () => {
         <p className="hidden lg:inline">Kids</p>
         <BellIcon className="h-6 w-6" />
         <Link href="/account">
-          <UserIcon className="w-6 h-6"/>
+          <UserIcon className="w-6 h-6" onClick={handleLogout}/>
         </Link>
       </div>
     </header>

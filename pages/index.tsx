@@ -5,6 +5,7 @@ import Req from '../common/utils/request'
 import Banner from '../components/Banner'
 import Header from '../components/Header'
 import Slider from '../components/Slider'
+import useAuth from '../hooks/useAuth'
 
 type HomeDataKeys = 'originals' | 'topRated' | 'trending' | 'romanceMovies' | 'horrorMovies' | 'comedyMovies' | 'actionMovies' | 'documentaries';
 
@@ -13,8 +14,12 @@ type HomeProps = {
 }
 
 const Home: NextPage<HomeProps> = ({ originals, topRated, romanceMovies, horrorMovies, comedyMovies, trending, actionMovies, documentaries }) => {
-  
+  const { loading } = useAuth();
+
   return (
+    loading 
+      ? null 
+      : (
     <div className="relative h-screen bg-gradient-to-b">
       <Head>
         <title>Netflix</title>
@@ -36,20 +41,12 @@ const Home: NextPage<HomeProps> = ({ originals, topRated, romanceMovies, horrorM
       </main>
       {/* Modal */}
     </div>
+    )  
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const [
-    originals,
-    topRated,
-    documentaries,
-    romanceMovies,
-    trending,
-    actionMovies,
-    horrorMovies,
-    comedyMovies
-  ] = await Promise.all([
+  const data = await Promise.all([
     fetch(Req.originals).then(res => res.json()),
     fetch(Req.topRated).then(res => res.json()),
     fetch(Req.documentaries).then(res => res.json()),
@@ -59,6 +56,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     fetch(Req.horrorMovies).then(res => res.json()),
     fetch(Req.comedyMovies).then(res => res.json()),
   ]);
+
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
+
+  const [
+    originals,
+    topRated,
+    documentaries,
+    romanceMovies,
+    trending,
+    actionMovies,
+    horrorMovies,
+    comedyMovies
+  ] = data;
 
   return {
     props: {

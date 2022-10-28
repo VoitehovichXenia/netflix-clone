@@ -36,4 +36,16 @@
   .red-thin-scrollbar {
     @apply !scrollbar-thin !scrollbar-track-transparent !scrollbar-thumb-red-800 scrollbar-thumb-rounded;
   }
+
+  .input {
+    @apply w-full rounded bg-transparent border-b-[1px] border-b-red-800 outline-none px-5 py-3.5 placeholder-[gray] focus:bg-[#454545] focus:border-b-0 cursor-text;
+  }
+
+  .form-btn {
+    @apply w-full rounded bg-red-800/80 py-4 font-bold text-[gray] transition delay-200 hover:text-white hover:bg-red-800/100;
+  }
+
+  .form-btn-outlined {
+    @apply w-full rounded bg-transparent border-2 border-red-800 py-4 font-bold text-[gray] transition delay-200 hover:text-white hover:bg-red-800/100;
+  }
 }
